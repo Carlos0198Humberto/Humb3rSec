@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <title>Guías Técnicas | Humb3rt0Sec</title>
+    <link rel="stylesheet" href="./../css/guias.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="./../image/jpg/L_Carlos-removebg-preview.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <noscript>
+      <div
+        style="
+          background: #ffdddd;
+          color: #660000;
+          padding: 10px;
+          text-align: center;
+        "
+      >
+        JavaScript está deshabilitado. Habilita JavaScript para que la
+        aplicación funcione correctamente.
+      </div>
+    </noscript>
+
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+      <h1>Guías Técnicas</h1>
+      <div class="auth-section">
+        <div id="user-info" class="usuario-info" style="display: none">
+          <img id="user-photo" src="" alt="Foto de perfil" class="avatar" />
+          <span id="user-email" class="correo"></span>
+          <button id="logout-btn" class="btn cerrar-sesion" type="button">
+            Cerrar sesión
+          </button>
+        </div>
+        <button id="login-btn" class="btn iniciar-sesion" type="button">
+          Iniciar sesión con Google
+        </button>
+      </div>
+    </header>
+
+    <!-- FORMULARIO -->
+    <main class="contenedor-principal layout-flex">
+      <section id="formulario-container" class="formulario oculto">
+        <h2>Crear nueva guía</h2>
+        <form id="guia-form">
+          <input
+            type="text"
+            id="titulo"
+            placeholder="Título de la guía"
+            required
+          />
+          <textarea
+            id="descripcion"
+            placeholder="Descripción general"
+            required
+          ></textarea>
+          <input
+            type="text"
+            id="sistema"
+            placeholder="Sistema Operativo (Linux, Windows...)"
+          />
+
+          <hr />
+
+          <div id="pasos-container">
+            <!-- Aquí se insertarán los pasos dinámicamente -->
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              margin-top: 10px;
+            "
+          >
+            <button type="button" id="agregar-paso-btn" class="btn">
+              ➕ Agregar paso
+            </button>
+
+            <button type="submit" id="guardar-btn" class="btn guardar">
+              Guardar guía
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- LISTADO DE GUÍAS -->
+      <section id="lista-guias">
+        <h2>Todas las guías</h2>
+        <div id="guias-container" class="contenedor-apuntes"></div>
+      </section>
+    </main>
+
+    <!-- DETALLE DE GUÍA SELECCIONADA -->
+    <section id="detalle-guia" class="detalle-guia oculto"></section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+      <p>&copy; 2025 Humb3rt0Sec. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- DEBUG -->
+    <script>
+      (function () {
+        window.APP_DEBUG = location.search.includes("debug=1");
+        const createDebugPanel = () => {
+          const panel = document.createElement("div");
+          panel.id = "debug-log";
+          panel.style.cssText =
+            "position:fixed;right:12px;bottom:12px;background:rgba(0,0,0,0.75);color:#fff;padding:8px;border-radius:6px;max-width:360px;z-index:99999;display:none;max-height:40vh;overflow:auto;font-size:12px;";
+          document.body.appendChild(panel);
+        };
+        createDebugPanel();
+        window.logDebug = function (msg) {
+          console.log("[DEBUG]", msg);
+          const el = document.getElementById("debug-log");
+          if (!el) return;
+          const line = document.createElement("div");
+          line.textContent = "[" + new Date().toLocaleTimeString() + "] " + msg;
+          el.appendChild(line);
+          if (window.APP_DEBUG) el.style.display = "block";
+        };
+        window.logDebug("HTML cargado");
+      })();
+    </script>
+    <a href="/cibersecurity/blog.html" class="btn regresar">⬅ Regresar</a>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="./../src/js/firebase-init.js"></script>
+    <script type="module" src="./../src/js/guias.js"></script>
+  </body>
+</html>

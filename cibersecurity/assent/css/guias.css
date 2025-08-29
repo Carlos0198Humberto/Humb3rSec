@@ -1,0 +1,968 @@
+/* ======================= VARIABLES ======================= */
+:root {
+  --primary: #e4e4e4;
+  --dark-bg: #141414;
+  --accent: #ff4d4d;
+  --radius: 0.5rem;
+  --red: #ff4d4d;
+  --color-claro: #3498db;
+  --color-oscuro: #2c3e50;
+  --green: #2ecc71;
+  --yellow: #f1c40f;
+  --blue: #1e90ff;
+  --color-principal: #3498db; /* agregado para botones file-upload */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--primary);
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  line-height: 1.6;
+}
+
+/* ================= ENCABEZADO ================= */
+header.encabezado {
+  background-color: var(--color-oscuro);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  color: var(--primary);
+  border-bottom: 2px solid var(--accent);
+}
+
+.btn.regresar {
+  position: fixed;
+  bottom: 200px; /* más arriba */
+  left: 200px;
+  display: inline-block;
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1rem;
+  display: inline-block;
+  background: linear-gradient(180deg, #ff4d4d, #d63333);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.8), 0 0 20px rgba(255, 77, 77, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, left 0.2s ease,
+    bottom 0.2s ease;
+}
+
+.btn.regresar:hover {
+  background-color: #333;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--red);
+}
+
+.btn.iniciar-sesion {
+  background-color: var(--blue);
+}
+
+.btn.iniciar-sesion:hover {
+  background-color: #2980b9;
+}
+
+.btn.cerrar-sesion {
+  background-color: var(--red);
+}
+
+.btn.cerrar-sesion:hover {
+  background-color: #c0392b;
+}
+/* ================= MAIN ================= */
+main.contenedor-principal {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  flex: 1 0 auto; /* ocupa el espacio restante */
+}
+
+/* ================= FORMULARIO ================= */
+section.formulario {
+  background-color: #1f1f1f;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+section.formulario h2 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+form#guia-form input,
+form#guia-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background-color: #2c2c2c;
+  color: var(--primary);
+  border: 1px solid #444;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+form#guia-form hr {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid #333;
+}
+
+#pasos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ================= TARJETAS ================= */
+.contenedor-apuntes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Se mantienen los estilos de las tarjetas tal como estaban */
+.tarjeta {
+  background-color: #2a2d32;
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: #fff;
+  width: 100%;
+  max-width: 350px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.tarjeta-titulo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-descripcion {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.tarjeta-sistema {
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+.tarjeta:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+}
+
+.tarjeta h3 {
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin: 0.5rem 0;
+}
+
+.tarjeta img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.tarjeta p {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.tarjeta pre {
+  background-color: #2b2b2b;
+  color: #00ffcc;
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  width: 100%;
+  overflow-x: auto;
+  text-align: left;
+}
+
+.tarjeta .acciones {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.boton-editar,
+.boton-eliminar {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+.boton-editar {
+  background-color: var(--blue);
+}
+
+.boton-eliminar {
+  background-color: var(--red);
+}
+
+.tarjeta .autor {
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 0.5rem;
+}
+/* ================= FORMULARIO IMAGEN BOTÓN ================= */
+.file-upload-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.file-upload-label {
+  display: block;
+  background-color: #333;
+  color: var(--primary);
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid var(--primary);
+  margin-top: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.file-upload-label:hover {
+  background-color: #555;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+/* ================= FOOTER ================= */
+footer.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #111;
+  font-size: 0.8rem;
+  color: #aaa;
+  border-top: 1px solid #333;
+}
+
+/* ================= TIMELINE PASOS ================= */
+.timeline {
+  position: relative;
+  margin-top: 2rem;
+  padding-left: 2rem;
+  border-left: 3px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.paso {
+  position: relative;
+  background-color: #2c2c2c;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  color: var(--primary);
+  transition: transform 0.2s;
+  border-left: 6px solid var(--color-claro);
+}
+
+.paso:hover {
+  transform: scale(1.02);
+}
+
+.paso::before {
+  content: "";
+  position: absolute;
+  left: -1.45rem;
+  top: 1rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--accent);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.paso h4 {
+  margin: 0 0 0.5rem;
+  color: var(--color-claro);
+  font-size: 1rem;
+}
+
+.paso p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #ddd;
+}
+
+/* Colores dinámicos para hasta 30 pasos */
+:root {
+  --paso-color-1: #ff4d4d;
+  --paso-color-2: #1e90ff;
+  --paso-color-3: #2ecc71;
+  --paso-color-4: #f1c40f;
+  --paso-color-5: #9b59b6;
+  --paso-color-6: #e67e22;
+  --paso-color-7: #34495e;
+  --paso-color-8: #e84393;
+  --paso-color-9: #00cec9;
+  --paso-color-10: #fdcb6e;
+  --paso-color-11: #6c5ce7;
+  --paso-color-12: #ff6b81;
+  --paso-color-13: #00b894;
+  --paso-color-14: #fab1a0;
+  --paso-color-15: #81ecec;
+  --paso-color-16: #a29bfe;
+  --paso-color-17: #ffeaa7;
+  --paso-color-18: #55efc4;
+  --paso-color-19: #d63031;
+  --paso-color-20: #6c3483;
+  --paso-color-21: #1abc9c;
+  --paso-color-22: #2c3e50;
+  --paso-color-23: #ff9ff3;
+  --paso-color-24: #f368e0;
+  --paso-color-25: #48dbfb;
+  --paso-color-26: #10ac84;
+  --paso-color-27: #feca57;
+  --paso-color-28: #5f27cd;
+  --paso-color-29: #c8d6e5;
+  --paso-color-30: #576574;
+}
+
+.paso[data-color] {
+  border-left-color: var(--paso-color-1);
+}
+
+.paso[data-color="1"] {
+  border-left-color: var(--paso-color-1);
+}
+.paso[data-color="2"] {
+  border-left-color: var(--paso-color-2);
+}
+.paso[data-color="3"] {
+  border-left-color: var(--paso-color-3);
+}
+.paso[data-color="4"] {
+  border-left-color: var(--paso-color-4);
+}
+.paso[data-color="5"] {
+  border-left-color: var(--paso-color-5);
+}
+/* ... hasta data-color="30" */
+.paso[data-color="30"] {
+  border-left-color: var(--paso-color-30);
+}
+.layout-flex {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#formulario-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #1e1e2f;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#guia-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#guia-form input,
+#guia-form textarea,
+#guia-form select {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #2c2c3f;
+  color: white;
+  font-size: 1rem;
+}
+
+#guia-form input:focus,
+#guia-form textarea:focus,
+#guia-form select:focus {
+  outline: 2px solid var(--primary);
+}
+
+#pasos-container .paso {
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #2a2a3a;
+}
+
+.btn {
+  padding: 0.6rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0070c0;
+}
+
+#lista-guias {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+#detalle-guia {
+  padding: 2rem;
+}
+
+.detalle-contenido {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.paso-detalle {
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+.paso-detalle img {
+  margin-top: 0.5rem;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.volver-btn {
+  margin-top: 2rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#agregar-paso-btn {
+  margin-top: 20px;
+}
+
+.tarjeta-guia {
+  background-color: #202030;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.tarjeta-guia:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.tarjeta-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-titulo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.tarjeta-sistema {
+  background-color: #333;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+}
+
+.tarjeta-descripcion {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.btn-ver-mas {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.btn-ver-mas:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+.detalle-contenido {
+  padding: 2rem;
+  background-color: #1a1a2e;
+  border-radius: 12px;
+  margin-top: 2rem;
+  color: #fff;
+}
+
+.detalle-titulo {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.detalle-descripcion {
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+/* Timeline general */
+.timeline {
+  position: relative;
+  margin-left: 1rem;
+  border-left: 3px solid var(--primary);
+  padding-left: 2rem;
+}
+
+/* Cada ítem */
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+/* Puntos de la línea */
+.timeline-dot {
+  position: absolute;
+  left: -1.2rem;
+  top: 0.2rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--primary);
+  border-radius: 50%;
+}
+
+/* Contenido del paso */
+.timeline-content {
+  background-color: #2b2b40;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-content h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.timeline-content p {
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+
+.volver-btn {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.volver-btn:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+}
+
+.tarjeta-contenido {
+  text-align: center;
+}
+
+.oculto {
+  display: none;
+}
+
+#guia-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#guia-form input,
+#guia-form textarea,
+#guia-form select {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #2a2d32;
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+#guia-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#guia-form input:focus,
+#guia-form textarea:focus,
+#guia-form select:focus {
+  outline: none;
+  border-color: #00b4d8;
+  box-shadow: 0 0 5px #00b4d8;
+}
+
+#guia-form button {
+  background: #00b4d8;
+  color: white;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#guia-form button:hover {
+  background: #0096c7;
+}
+
+#user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.file-upload-label {
+  background-color: var(--color-principal);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.file-upload-label input {
+  display: none;
+}
+/* Ajustes de responsividad */
+@media (max-width: 1024px) {
+  main.contenedor-principal {
+    padding: 1.5rem;
+  }
+
+  header.encabezado {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .auth-section {
+    justify-content: center;
+  }
+
+  .layout-flex {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #lista-guias,
+  #detalle-guia {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Limitar tamaño de imágenes en vista previa de guías */
+  .tarjeta img,
+  .tarjeta-guia img {
+    width: 100%; /* ocupar todo el ancho de la tarjeta */
+    max-width: 300px; /* ancho máximo para que no se vea gigante */
+    height: auto; /* mantener proporción */
+    object-fit: cover; /* recortar centrado si es necesario */
+    border-radius: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  #guia-form {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header.encabezado {
+    padding: 0.5rem 1rem;
+  }
+
+  .btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .tarjeta-titulo {
+    font-size: 1.1rem;
+  }
+
+  .detalle-titulo {
+    font-size: 1.5rem;
+  }
+
+  .timeline-content h4 {
+    font-size: 1rem;
+  }
+}
+
+/* Animaciones suaves */
+button,
+.btn,
+.file-upload-label,
+.tarjeta,
+.tarjeta-guia {
+  transition: all 0.3s ease;
+}
+
+button:active,
+.btn:active,
+.tarjeta:hover,
+.tarjeta-guia:hover {
+  transform: scale(0.98);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Scroll personalizado */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+  border: 2px solid #1a1a2e;
+}
+
+/* Estados deshabilitados */
+button:disabled,
+.btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Mensajes de error */
+.error-msg {
+  color: var(--red);
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Mensajes de éxito */
+.success-msg {
+  color: var(--green);
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer adicional */
+footer.footer p {
+  margin: 0;
+}
+
+/* Ajuste de formularios internos */
+#formulario-container form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+#formulario-container form input[type="text"],
+#formulario-container form textarea,
+#formulario-container form select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #2a2d32;
+  color: #fff;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+#formulario-container form button {
+  background-color: var(--blue);
+  color: #fff;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#formulario-container form button:hover {
+  background-color: #2980b9;
+}
+/* ================= BOTÓN REGRESAR ================= */
+.btn.regresar {
+  position: fixed; /* siempre visible respecto a la ventana */
+  bottom: 200px; /* distancia desde la parte inferior */
+  left: 1370px; /* distancia desde el borde izquierdo */
+  z-index: 1000; /* encima de todo */
+
+  display: inline-block;
+  background: linear-gradient(180deg, #ff4d4d, #d63333);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.8), 0 0 20px rgba(255, 77, 77, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, left 0.2s ease,
+    bottom 0.2s ease;
+}
+
+.btn.regresar:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 15px rgba(255, 77, 77, 1), 0 0 30px rgba(255, 77, 77, 0.8);
+}
+
+/* ================= AJUSTE RESPONSIVO ================= */
+@media (max-width: 1200px) {
+  .btn.regresar {
+    left: 20px; /* más cerca del borde en pantallas más pequeñas */
+    bottom: 70px; /* ajusta según necesites */
+  }
+}
+
+@media (max-width: 768px) {
+  .btn.regresar {
+    bottom: 50px; /* subir un poco más en móviles */
+    left: 15px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn.regresar {
+    bottom: 40px;
+    left: 10px;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}

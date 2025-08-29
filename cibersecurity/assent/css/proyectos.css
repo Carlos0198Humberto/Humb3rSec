@@ -1,0 +1,587 @@
+/* proyectos.css — Versión reescrita y completa
+   Diseñado para trabajar con tu HTML y el JS que creaste.
+   Incluye: variables, layout, formulario, inputs dinámicos, tarjetas, modal y responsive.
+*/
+
+/* ======================= VARIABLES ======================= */
+:root {
+  --bg: #0f1720; /* fondo oscuro */
+  --card-bg: #111827;
+  --muted: #9aa4b2;
+  --text: #e6eef6;
+  --accent: #38a3ff; /* color principal (azul) */
+  --accent-2: #7c3aed; /* color secundario (morado) */
+  --success: #2ecc71;
+  --danger: #ff5252;
+  --glass: rgba(255, 255, 255, 0.03);
+  --radius: 12px;
+  --small-radius: 8px;
+  --shadow-1: 0 6px 18px rgba(2, 6, 23, 0.6);
+  --shadow-2: 0 10px 30px rgba(2, 6, 23, 0.7);
+  --transition: 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  --max-width: 1100px;
+  --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}
+
+/* Light theme helper (optional use by JS) */
+.light {
+  --bg: #f6f8fb;
+  --card-bg: #ffffff;
+  --muted: #55606a;
+  --text: #0f1720;
+  --glass: rgba(15, 23, 32, 0.03);
+}
+
+/* ================= BODY / BASE ================= */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font);
+  background: linear-gradient(180deg, var(--bg), #071126 120%);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* altura mínima = pantalla */
+}
+
+/* Centered container */
+main.contenedor-principal {
+  max-width: var(--max-width);
+  margin: 2.2rem auto;
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  align-items: start;
+  flex: 1; /* ocupa el espacio disponible */
+}
+
+/* For narrow screens collapse to single column */
+@media (max-width: 980px) {
+  main.contenedor-principal {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+/* ================= HEADER ================= */
+header.encabezado {
+  max-width: var(--max-width);
+  margin: 1.5rem auto 0;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  box-shadow: var(--shadow-1);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+header.encabezado h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.2px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Auth section */
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.auth-section #user-nombre {
+  font-size: 0.95rem;
+  color: var(--muted);
+  white-space: nowrap;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Avatar */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  box-shadow: 0 2px 8px rgba(2, 6, 23, 0.6);
+}
+
+/* Buttons base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition),
+    opacity var(--transition);
+  box-shadow: 0 6px 18px rgba(56, 163, 255, 0.12);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* variant */
+.btn.cerrar-sesion {
+  background: var(--danger);
+  box-shadow: 0 6px 18px rgba(255, 82, 82, 0.08);
+}
+.btn.iniciar-sesion {
+  background: var(--accent);
+}
+
+/* hover */
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2);
+}
+
+/* ================= LEFT COLUMN - LIST / TARJETAS ================= */
+.contenedor-apuntes {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+  align-content: start;
+}
+
+/* When layout has two columns, left column should be the list.
+   We'll adjust via order when screen is small using the main grid positions.
+*/
+@media (min-width: 981px) {
+  .contenedor-apuntes {
+    order: 1;
+  }
+}
+
+/* Card (tarjeta) */
+.tarjeta {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.tarjeta:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(2, 6, 23, 0.7);
+}
+
+/* Card image */
+.tarjeta img {
+  width: 140px;
+  height: 95px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: #0a0f16;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Card content */
+.tarjeta h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+.tarjeta p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* actions inside card */
+.acciones {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.6rem;
+}
+.acciones .btn {
+  padding: 0.45rem 0.7rem;
+  font-size: 0.86rem;
+}
+
+/* Small responsive tweak to make cards stack */
+@media (max-width: 680px) {
+  .tarjeta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .tarjeta img {
+    width: 100%;
+    height: 170px;
+  }
+}
+
+/* ================= RIGHT COLUMN - FORMULARIO ================= */
+section.formulario {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.02)
+  );
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: var(--shadow-1);
+  width: 100%;
+  max-height: calc(100vh - 160px);
+  overflow: auto;
+}
+
+/* In single-column layout, form should appear above list (so order change) */
+@media (max-width: 980px) {
+  section.formulario {
+    order: 0;
+    margin-bottom: 1rem;
+  }
+  .contenedor-apuntes {
+    order: 1;
+  }
+}
+
+section.formulario h2 {
+  margin: 0 0 0.8rem 0;
+  font-size: 1.1rem;
+  color: var(--text);
+  text-align: center;
+}
+
+/* form-group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 0.9rem;
+}
+.form-group label {
+  font-size: 0.93rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* inputs and textarea */
+input[type="text"],
+input[type="file"],
+textarea,
+.imagen-descripcion {
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--glass);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+input[type="text"]::placeholder,
+textarea::placeholder,
+.imagen-descripcion::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus,
+.imagen-descripcion:focus {
+  box-shadow: 0 6px 18px rgba(56, 163, 255, 0.12);
+  border-color: rgba(56, 163, 255, 0.85);
+}
+
+/* textarea sizing */
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* submit button full width */
+#agregar-proyecto-btn {
+  width: 100%;
+  display: inline-block;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(56, 163, 255, 0.12);
+}
+
+/* small helpers for image section */
+.imagen-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.imagen-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.01);
+  padding: 0.55rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+.imagen-wrapper .imagen-input {
+  flex-basis: 45%;
+}
+.imagen-wrapper .imagen-descripcion {
+  flex: 1;
+}
+
+/* controls in image wrapper */
+.imagen-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: flex-start;
+}
+.eliminar-imagen-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.eliminar-imagen-btn:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+}
+
+/* agregar-imagen button global */
+.agregar-imagen-global,
+.agregar-imagen-btn {
+  align-self: flex-start;
+  padding: 0.45rem 0.7rem;
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.agregar-imagen-global:hover,
+.agregar-imagen-btn:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+}
+
+/* small preview inside form when editing existing images */
+.imagen-preview img {
+  display: block;
+  max-width: 120px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+.imagen-preview small {
+  color: var(--muted);
+  display: block;
+  margin-top: 4px;
+}
+
+/* ================= MODAL ================= */
+.modal-oculto {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6));
+  z-index: 9999;
+  padding: 1.25rem;
+}
+.modal-oculto.show {
+  display: flex;
+}
+
+.modal-contenido {
+  width: min(920px, 98%);
+  max-height: calc(100vh - 100px);
+  overflow: auto;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: var(--shadow-2);
+  animation: modalIn 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+@keyframes modalIn {
+  from {
+    transform: translateY(12px) scale(0.995);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* modal header and close */
+.cerrar-modal {
+  float: right;
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.1rem 0.35rem;
+  border-radius: 8px;
+}
+.cerrar-modal:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.modal-contenido h2 {
+  margin: 0 0 0.6rem 0;
+  color: var(--text);
+}
+#modal-descripcion {
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+/* modal images grid */
+#modal-imagenes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+.modal-imagen-block img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* modal actions */
+.acciones-modal {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 0.6rem;
+}
+.boton-editar {
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  color: #fff;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+}
+.boton-eliminar {
+  background: var(--danger);
+  color: #fff;
+  padding: 0.5rem 0.7rem;
+  border-radius: 10px;
+}
+
+/* ================= EMPTY STATE ================= */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
+  border: 1px dashed rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+}
+
+/* ================= SMALL SCREEN ADJUSTMENTS ================= */
+@media (max-width: 560px) {
+  header.encabezado {
+    padding: 0.8rem 0.9rem;
+    margin: 0.6rem auto;
+  }
+  .auth-section #user-nombre {
+    display: none;
+  }
+  main.contenedor-principal {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .tarjeta img {
+    height: 140px;
+  }
+  .modal-contenido {
+    padding: 1rem;
+  }
+}
+
+/* ================= Utilities ================= */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* ================= END ================= */
+/* Estilo del footer */
+footer.footer {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.boton-regresar {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  padding: 0.45rem 0.8rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.boton-regresar:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent);
+}

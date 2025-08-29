@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyectos</title>
+    <link rel="stylesheet" href="./../css/proyectos.css" />
+    <link rel="icon" type="image/png" sizes="64x64"
+    href="./../image/jpg/L_Carlos-removebg-preview.png"
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header class="encabezado">
+      <a href="/cibersecurity/blog.html" class="btn boton-regresar"
+        >⬅ Regresar</a
+      >
+      <h1>Proyectos</h1>
+      <div class="auth-section" id="auth-section">
+        <span id="user-nombre">Invitado</span>
+        <img
+          src="./../image/perfil/Avatar.png"
+          alt="Avatar del usuario"
+          class="avatar"
+        />
+        <button class="btn cerrar-sesion" id="logoutBtn" style="display: none">
+          Cerrar sesión
+        </button>
+        <button class="btn iniciar-sesion" id="loginBtn">Iniciar sesión</button>
+      </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="contenedor-principal">
+      <!-- ================= FORMULARIO DE PROYECTO ================= -->
+      <section
+        class="formulario"
+        id="formulario-proyecto"
+        style="display: none"
+      >
+        <h2>Agregar Proyecto</h2>
+        <form id="proyecto-form">
+          <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required />
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="categoria">Categoría:</label>
+            <input type="text" id="categoria" name="categoria" />
+          </div>
+
+          <div class="imagenes-container">
+            <div class="imagen-wrapper">
+              <input type="file" class="imagen-input" accept="image/*" />
+              <input
+                type="text"
+                class="imagen-descripcion"
+                placeholder="Descripción de la imagen"
+              />
+              <div class="imagen-controls">
+                <button type="button" class="eliminar-imagen-btn btn">
+                  Eliminar imagen
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn" id="agregar-proyecto-btn">
+            Agregar Proyecto
+          </button>
+          <a href="/cibersecurity/blog.html" class="btn btn-regresar"
+            >⬅ Regresar</a
+          >
+        </form>
+      </section>
+
+      <!-- ================= CONTENEDOR DE TARJETAS ================= -->
+      <section class="contenedor-apuntes" id="contenedor-proyectos">
+        <!-- Las tarjetas de proyectos se generarán dinámicamente -->
+      </section>
+    </main>
+
+    <!-- ================= MODAL DE PROYECTO ================= -->
+    <div
+      id="modal-proyecto"
+      class="modal-oculto"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-contenido">
+        <button
+          class="cerrar-modal"
+          id="cerrar-modal"
+          aria-label="Cerrar ventana"
+        >
+          &times;
+        </button>
+        <h2 id="modal-titulo">Título del Proyecto</h2>
+        <div id="modal-imagenes" aria-live="polite">
+          <!-- Imágenes con descripción se cargarán aquí -->
+        </div>
+        <p id="modal-descripcion">Descripción completa del proyecto...</p>
+        <div class="acciones-modal">
+          <button
+            class="btn boton-editar"
+            id="modal-editar"
+            style="display: none"
+          >
+            Editar
+          </button>
+          <button
+            class="btn boton-eliminar"
+            id="modal-eliminar"
+            style="display: none"
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+      <p>&copy; 2025 Mi Plataforma de Proyectos</p>
+    </footer>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script type="module" src="./../src/js/firebase-init.js"></script>
+    <script type="module" src="./../src/js/proyectos.js"></script>
+  </body>
+</html>

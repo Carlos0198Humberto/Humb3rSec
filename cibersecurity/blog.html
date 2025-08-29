@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>blog Humb3rSec</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="./../cibersecurity/assent/image/jpg/L_Carlos-removebg-preview.png"
+    />
+    <link rel="stylesheet" href="./assent/css/blog.css" />
+  </head>
+
+  <!-- SDK de Firebase -->
+  <script type="module">
+    // Importar funciones necesarias
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDOWUxARqbiF3idfU_DAEVNqTrOSuN4Usk",
+      authDomain: "humb3rsec.firebaseapp.com",
+      projectId: "humb3rsec",
+      storageBucket: "humb3rsec.firebasestorage.app",
+      messagingSenderId: "258233466271",
+      appId: "1:258233466271:web:05e8f556052aea1c67d1aa",
+    };
+
+    // Inicializar Firebase y Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Ejemplo: Guardar datos
+    async function guardarDatos() {
+      try {
+        const docRef = await addDoc(collection(db, "usuarios"), {
+          nombre: "Carlos",
+          email: "carlos@example.com",
+        });
+        console.log("Documento escrito con ID:", docRef.id);
+      } catch (e) {
+        console.error("Error al agregar documento:", e);
+      }
+    }
+
+    // Ejemplo: Leer datos
+    async function leerDatos() {
+      const querySnapshot = await getDocs(collection(db, "usuarios"));
+      querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} =>`, doc.data());
+      });
+    }
+
+    // Ejecutar ejemplo
+    guardarDatos();
+    leerDatos();
+  </script>
+
+  <body>
+    <!-- ====== HEADER ====== -->
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="nav-center-wrapper">
+          <ul class="navbar-nav flex-row">
+            <li class="nav-item">
+              <button id="btn-regresar" class="btn btn-primary">Home</button>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="nav-videos">Prácticas</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="nav-apuntes">Apuntes / Guías</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" id="nav-proyectos">Proyectos</a>
+            </li>
+          </ul>
+          <h3 id="nav-home" class="logo-btn">Humb3rSec</h3>
+        </div>
+        <div class="nav-underline"></div>
+      </nav>
+    </header>
+
+    <main style="padding-top: 80px">
+      <!-- ====== SECCIÓN INICIO ====== -->
+      <section id="section-home" class="welcome-section">
+        <div class="welcome-card">
+          <h1>🚀 Bienvenido a <span class="highlight">Humb3rSec</span></h1>
+          <p>
+            Un espacio dedicado a <strong>ciberseguridad</strong>,
+            <strong>proyectos</strong> y <strong>aprendizajes</strong>.
+          </p>
+
+          <div class="quote-box">
+            <blockquote>
+              "El conocimiento no se guarda, se comparte. Aquí construimos
+              juntos el futuro de la seguridad informática."
+            </blockquote>
+          </div>
+
+          <a href="./assent/html/proyectos.html" class="explore-btn">
+            Explorar proyectos
+          </a>
+        </div>
+      </section>
+
+      <!-- ====== SECCIÓN PRÁCTICAS ====== -->
+      <section
+        id="section-videos"
+        class="hidden"
+        style="max-width: 900px; margin: auto"
+      >
+        <div
+          id="videos-main-menu"
+          class="contenedor-diplomas"
+          style="text-align: center; margin-top: 2rem"
+        >
+          <h2 class="section-title">Secciones de Prácticas</h2>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 1rem;
+              flex-wrap: wrap;
+              margin-bottom: 1rem;
+            "
+          >
+            <button class="btn-outline-danger section-btn" data-section="1">
+              Prácticas - Ciberseguridad
+            </button>
+            <button class="btn-outline-danger section-btn" data-section="2">
+              Prácticas - Redes
+            </button>
+            <button class="btn-outline-danger section-btn" data-section="3">
+              Prácticas - python
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="videos-module"
+          class="contenedor-diplomas hidden"
+          style="margin-top: 2rem"
+        >
+          <button
+            id="videos-btn-back"
+            class="btn-outline-danger"
+            style="margin-bottom: 1rem"
+          >
+            ← Volver a Secciones
+          </button>
+          <h3 id="videos-section-title" style="color: var(--red)"></h3>
+
+          <div
+            id="video-container"
+            style="
+              max-width: 720px;
+              margin: auto;
+              box-shadow: 0 0 18px var(--red);
+              border-radius: 12px;
+              overflow: hidden;
+            "
+          >
+            <iframe
+              id="video-iframe"
+              width="100%"
+              height="405"
+              style="border: none; border-radius: 12px"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 1rem;
+              margin-top: 1rem;
+            "
+          >
+            <button id="video-prev" class="btn-outline-danger">Anterior</button>
+            <button id="video-next" class="btn-outline-danger">
+              Siguiente
+            </button>
+          </div>
+
+          <!-- Comentarios -->
+          <section
+            style="
+              margin-top: 2rem;
+              max-width: 720px;
+              margin-left: auto;
+              margin-right: auto;
+              color: var(--primary);
+            "
+          >
+            <h4 style="color: var(--red); margin-bottom: 0.5rem">
+              Comentarios
+            </h4>
+            <ul
+              id="comments-list"
+              style="
+                list-style: none;
+                padding-left: 0;
+                max-height: 150px;
+                overflow-y: auto;
+                background: #1e1e1e;
+                border: 2px solid var(--red);
+                border-radius: 8px;
+                margin-bottom: 0.5rem;
+              "
+            ></ul>
+            <div style="display: flex; gap: 0.5rem">
+              <input
+                type="text"
+                id="comment-input"
+                placeholder="Escribe un comentario..."
+                style="
+                  flex-grow: 1;
+                  padding: 0.5rem;
+                  border-radius: 8px;
+                  border: 1px solid var(--red);
+                  background: #121212;
+                  color: var(--primary);
+                "
+              />
+              <button id="btn-add-comment" class="btn-outline-danger">
+                Enviar
+              </button>
+            </div>
+          </section>
+
+          <!-- Apuntes por práctica -->
+          <section
+            style="
+              margin-top: 2rem;
+              max-width: 720px;
+              margin-left: auto;
+              margin-right: auto;
+              color: var(--primary);
+            "
+          >
+            <h4 style="color: var(--red); margin-bottom: 0.5rem">Apuntes</h4>
+            <textarea
+              id="notes-textarea"
+              placeholder="Escribe tus apuntes aquí..."
+              style="
+                width: 100%;
+                height: 120px;
+                background: #121212;
+                color: var(--primary);
+                border-radius: 8px;
+                border: 2px solid var(--red);
+                padding: 0.75rem;
+                font-size: 1rem;
+                resize: vertical;
+              "
+            ></textarea>
+            <button
+              id="btn-save-notes"
+              class="btn-outline-danger"
+              style="margin-top: 0.75rem"
+            >
+              Guardar apuntes
+            </button>
+            <p
+              id="notes-save-msg"
+              style="color: var(--red); margin-top: 0.5rem; display: none"
+            >
+              Apuntes guardados.
+            </p>
+          </section>
+        </div>
+      </section>
+
+      <!-- ====== SECCIÓN APUNTES / GUÍAS ====== -->
+      <section
+        id="section-apuntes"
+        class="hidden"
+        style="max-width: 900px; margin: auto; padding: 2rem"
+      >
+        <h2 class="section-title" style="color: var(--red); text-align: center">
+          Apuntes / Guías
+        </h2>
+        <p style="color: var(--primary); text-align: center">
+          Aquí guardo mis guías de instalación, configuraciones y notas
+          técnicas.
+        </p>
+
+        <div class="contenedor-proyectos">
+          <!-- Tarjeta 1 -->
+          <a
+            href="./../cibersecurity/assent/html/apuntes.html"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="proyecto-card">
+              <h3>Apuntes</h3>
+              <img src="./assent/image/jpg/apuntar.png" alt="Apuntes" />
+              <p>Aquí encontrarás todos mis apuntes necesarios</p>
+              <button class="btn-outline-danger">Ver apuntes</button>
+            </div>
+          </a>
+
+          <!-- Tarjeta 2 -->
+          <a
+            href="./../cibersecurity/assent/html/guias.html"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="proyecto-card">
+              <h3>Guías</h3>
+              <img
+                src="./assent/image/jpg/descripcion-del-producto.png"
+                alt="Guias"
+              />
+              <p>Aquí encontrarás todas mis guías de instalación</p>
+              <button class="btn-outline-danger">Ver guías</button>
+            </div>
+          </a>
+        </div>
+      </section>
+      <!-- ====== SECCIÓN PROYECTOS ====== -->
+      <!-- ====== SECCIÓN PROYECTOS ====== -->
+      <section
+        id="section-proyectos"
+        class="hidden"
+        style="max-width: 1000px; margin: auto; padding: 2rem"
+      >
+        <h2 class="section-title" style="color: var(--red); text-align: center">
+          Proyectos
+        </h2>
+
+        <div
+          class="contenedor-proyectos"
+          style="display: flex; justify-content: center; margin-top: 2rem"
+        >
+          <a
+            href="./assent/html/proyectos.html"
+            <!--
+            🔗
+            aquí
+            pones
+            el
+            link
+            de
+            tus
+            proyectos
+            --
+          >
+            <div
+              class="proyecto-card"
+              style="cursor: pointer; text-align: center"
+            >
+              <h3></h3>
+              <img
+                src="./assent/image/jpg/idea.png"
+                alt="Mis proyectos"
+                style="max-width: 200px; margin: auto"
+              />
+              <p>Explora todos mis proyectos en un solo lugar</p>
+              <button class="btn-outline-danger">Ver proyectos</button>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer
+      style="
+        text-align: center;
+        padding: 1rem 0;
+        border-top: 2px solid var(--red);
+        color: var(--primary);
+        margin-top: 4rem;
+      "
+    >
+      <p>© Humb3rt0Sec - 2025</p>
+    </footer>
+    <script>
+      // Forzar que el botón regrese al index.html
+      document
+        .getElementById("btn-regresar")
+        .addEventListener("click", function () {
+          window.location.href = "index.html"; // o "/index.html" si está en la raíz
+        });
+    </script>
+    <script src="./assent/src/js/blog.js"></script>
+  </body>
+</html>
